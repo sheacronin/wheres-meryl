@@ -1,3 +1,9 @@
+.wheres-meryl-container {
+    position: relative;
+    width: 200vw;
+}
+
 .wheres-meryl {
     width: 200vw;
+    height: 100%;
 }

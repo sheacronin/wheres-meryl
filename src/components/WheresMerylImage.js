@@ -1,9 +1,23 @@
+import { useState } from 'react';
 import '../styles/WheresMerylImage.css';
+import ClickBox from './ClickBox';
 
 function WheresMerylImage(props) {
     const { imageSrc } = props;
 
-    function getClickBoxFromClickEvent(e) {
+    const [clickBoxInfo, setClickBoxInfo] = useState({});
+
+    function showClickBox(e) {
+        const clickBoxWidth = e.target.width * 0.05;
+        const clickBoxBoundaries = getClickBoxBoundaries(e);
+
+        setClickBoxInfo({
+            width: clickBoxWidth,
+            boundaries: clickBoxBoundaries,
+        });
+    }
+
+    function getClickBoxBoundaries(e) {
         const coords = getClickedPercentageCoordinates(e);
         const clickBox = makeClickBox(coords);
         console.log(clickBox);
@@ -11,8 +25,8 @@ function WheresMerylImage(props) {
     }
 
     function getClickedPercentageCoordinates(e) {
-        const xPercentage = getClickedPercentage(e.clientX, e.target.width);
-        const yPercentage = getClickedPercentage(e.clientY, e.target.height);
+        const xPercentage = getClickedPercentage(e.pageX, e.target.width);
+        const yPercentage = getClickedPercentage(e.pageY, e.target.height);
 
         function getClickedPercentage(clickedCoord, imageDimension) {
             return (clickedCoord / imageDimension) * 100;
@@ -35,12 +49,15 @@ function WheresMerylImage(props) {
     }
 
     return (
-        <img
-            className="wheres-meryl"
-            src={imageSrc}
-            alt="Look around to find Donna and the Dynamos!"
-            onClick={getClickBoxFromClickEvent}
-        ></img>
+        <div className="wheres-meryl-container">
+            <img
+                className="wheres-meryl"
+                src={imageSrc}
+                alt="Look around to find Donna and the Dynamos!"
+                onClick={showClickBox}
+            />
+            <ClickBox info={clickBoxInfo} />
+        </div>
     );
 }
 
