@@ -1,7 +1,8 @@
 import '../styles/ClickBox.css';
+import meryl from '../img/meryl.png';
 
 function ClickBox(props) {
-    const { width, boundaries } = props.info;
+    const { width, boundaries, setSelectedTarget } = props;
 
     if (!width) return null;
 
@@ -12,7 +13,20 @@ function ClickBox(props) {
         height: width,
     };
 
-    return <div className="click-box" style={style}></div>;
+    return (
+        <div className="click-box" style={style}>
+            <div className="image-selection">
+                <h3>Who is here?</h3>
+                <img
+                    src={meryl}
+                    alt="Donna, played by Meryl Streep"
+                    onClick={() => setSelectedTarget('donna')}
+                />
+                <img src="#" alt="Tanya" />
+                <img src="#" alt="Rosie" />
+            </div>
+        </div>
+    );
 }
 
 export default ClickBox;

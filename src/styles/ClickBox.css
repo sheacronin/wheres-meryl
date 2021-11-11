@@ -1,5 +1,22 @@
 .click-box {
     border: 2px solid black;
     position: absolute;
-    transform: translate(-100%, 0);
+    transform: translate(-100%, -150%);
+}
+
+.image-selection {
+    border: 2px solid black;
+    width: 300px;
+    height: 130px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(100%, -100%);
+    background-color: white;
+}
+
+.image-selection h3 {
+    background-color: pink;
+    text-align: center;
+    height: 30px;
 }
