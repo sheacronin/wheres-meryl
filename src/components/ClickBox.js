@@ -1,5 +1,7 @@
 import '../styles/ClickBox.css';
-import meryl from '../img/meryl.png';
+import donna from '../img/donna.png';
+import tanya from '../img/tanya.png';
+import rosie from '../img/rosie.png';
 
 function ClickBox(props) {
     const { width, boundaries, setSelectedTarget } = props;
@@ -17,13 +19,18 @@ function ClickBox(props) {
         <div className="click-box" style={style}>
             <div className="image-selection">
                 <h3>Who is here?</h3>
-                <img
-                    src={meryl}
-                    alt="Donna, played by Meryl Streep"
-                    onClick={() => setSelectedTarget('donna')}
-                />
-                <img src="#" alt="Tanya" />
-                <img src="#" alt="Rosie" />
+                <button onClick={() => setSelectedTarget('donna')}>
+                    <img src={donna} alt="Donna, played by Meryl Streep" />
+                </button>
+                <button onClick={() => setSelectedTarget('tanya')}>
+                    <img
+                        src={tanya}
+                        alt="Tanya, played by Christine Baranski"
+                    />
+                </button>
+                <button onClick={() => setSelectedTarget('rosie')}>
+                    <img src={rosie} alt="Rosie, played by Julie Walters" />
+                </button>
             </div>
         </div>
     );

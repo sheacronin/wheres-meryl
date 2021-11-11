@@ -15,6 +15,16 @@
     background-color: white;
 }
 
+.image-selection button {
+    background-color: transparent;
+    border: none;
+}
+
+.image-selection button:hover {
+    cursor: pointer;
+    background-color: pink;
+}
+
 .image-selection h3 {
     background-color: pink;
     text-align: center;
