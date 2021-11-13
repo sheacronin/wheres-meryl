@@ -12,7 +12,8 @@ function WheresMerylImage(props) {
 
     const [clickBoxBoundaries, setClickBoxBoundaries] = useState({});
     const [clickBoxWidth, setClickBoxWidth] = useState({});
-    const [selectedTarget, setSelectedTarget] = useState('');
+    const [selectedTarget, setSelectedTarget] = useState(null);
+    const [showingClickBox, setShowingClickBox] = useState(false);
 
     function showClickBox(e) {
         const width = e.target.width * 0.05;
@@ -20,6 +21,7 @@ function WheresMerylImage(props) {
 
         setClickBoxWidth(width);
         setClickBoxBoundaries(boundaries);
+        setShowingClickBox(true);
     }
 
     function getClickBoxBoundaries(e) {
@@ -55,7 +57,13 @@ function WheresMerylImage(props) {
     useEffect(() => {
         if (!selectedTarget) return;
 
-        checkIfClickedTarget(selectedTarget);
+        const clickedTarget = checkIfClickedTarget(selectedTarget);
+
+        if (clickedTarget) {
+            handleCorrectSelection();
+        } else {
+            handleIncorrectSelection();
+        }
 
         async function checkIfClickedTarget(target) {
             const targetRef = doc(db, 'images/1/character-positions', target);
@@ -107,6 +115,22 @@ function WheresMerylImage(props) {
             console.log(isInTarget);
             return isInTarget;
         }
+
+        function handleCorrectSelection() {
+            // place marker on character
+            // show text that says "You've found [character]!"
+            setShowingClickBox(false);
+            setSelectedTarget(null);
+
+            // check if all 3 characters have been found
+            // if they have, end the game and ask for name
+        }
+
+        function handleIncorrectSelection() {
+            // show text that says "Sorry, there is no Donna or Dynamo here!"
+            setShowingClickBox(false);
+            setSelectedTarget(null);
+        }
     }, [selectedTarget, clickBoxBoundaries]);
 
     return (
@@ -121,6 +145,7 @@ function WheresMerylImage(props) {
                 width={clickBoxWidth}
                 boundaries={clickBoxBoundaries}
                 setSelectedTarget={setSelectedTarget}
+                showingClickBox={showingClickBox}
             />
         </div>
     );

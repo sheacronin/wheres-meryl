@@ -4,7 +4,7 @@ import tanya from '../img/tanya.png';
 import rosie from '../img/rosie.png';
 
 function ClickBox(props) {
-    const { width, boundaries, setSelectedTarget } = props;
+    const { width, boundaries, setSelectedTarget, showingClickBox } = props;
 
     if (!width) return null;
 
@@ -16,7 +16,7 @@ function ClickBox(props) {
     };
 
     return (
-        <div className="click-box" style={style}>
+        <div className="click-box" style={style} hidden={!showingClickBox}>
             <div className="image-selection">
                 <h3>Who is here?</h3>
                 <button onClick={() => setSelectedTarget('donna')}>
