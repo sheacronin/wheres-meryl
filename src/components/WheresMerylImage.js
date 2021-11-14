@@ -3,12 +3,11 @@ import '../styles/WheresMerylImage.css';
 import ClickBox from './ClickBox';
 // eslint-disable-next-line no-unused-vars
 import app from '../firebaseInit';
-import { getFirestore, getDoc, doc } from 'firebase/firestore';
-
-const db = getFirestore();
+import CharacterMarker from './CharacterMarker';
+import { getTargetPositionBox } from '../firestoreData';
 
 function WheresMerylImage(props) {
-    const { imageSrc } = props;
+    const { imageSrc, foundCharacters, setFoundCharacters } = props;
 
     const [clickBoxBoundaries, setClickBoxBoundaries] = useState({});
     const [clickBoxWidth, setClickBoxWidth] = useState({});
@@ -57,26 +56,17 @@ function WheresMerylImage(props) {
     useEffect(() => {
         if (!selectedTarget) return;
 
-        const clickedTarget = checkIfClickedTarget(selectedTarget);
-
-        if (clickedTarget) {
-            handleCorrectSelection();
-        } else {
-            handleIncorrectSelection();
-        }
+        checkIfClickedTarget(selectedTarget).then((didClickTarget) => {
+            console.log(didClickTarget);
+            if (didClickTarget) {
+                handleCorrectSelection(selectedTarget);
+            } else {
+                handleIncorrectSelection(selectedTarget);
+            }
+        });
 
         async function checkIfClickedTarget(target) {
-            const targetRef = doc(db, 'images/1/character-positions', target);
-            const targetSnap = await getDoc(targetRef);
-
-            if (targetSnap.exists()) {
-                console.log('Document data:', targetSnap.data());
-            } else {
-                console.log('No such document!');
-            }
-
-            const targetBox = targetSnap.data();
-            console.log(clickBoxBoundaries);
+            const targetBox = await getTargetPositionBox(target);
 
             const isInTarget =
                 isInHorizontalTarget(targetBox) &&
@@ -116,25 +106,37 @@ function WheresMerylImage(props) {
             return isInTarget;
         }
 
-        function handleCorrectSelection() {
-            // place marker on character
-            // show text that says "You've found [character]!"
+        function handleCorrectSelection(target) {
             setShowingClickBox(false);
             setSelectedTarget(null);
+
+            console.log('found ' + target);
+            // place marker on character
+            setFoundCharacters((prevState) => [...prevState, target]);
+
+            // TODO: show text that says "You've found [character]!"
 
             // check if all 3 characters have been found
             // if they have, end the game and ask for name
         }
 
-        function handleIncorrectSelection() {
+        function handleIncorrectSelection(target) {
             // show text that says "Sorry, there is no Donna or Dynamo here!"
             setShowingClickBox(false);
             setSelectedTarget(null);
         }
-    }, [selectedTarget, clickBoxBoundaries]);
+    }, [
+        selectedTarget,
+        clickBoxBoundaries,
+        setFoundCharacters,
+        foundCharacters,
+    ]);
 
     return (
         <div className="wheres-meryl-container">
+            {foundCharacters.map((character) => (
+                <CharacterMarker key={character} characterName={character} />
+            ))}
             <img
                 className="wheres-meryl"
                 src={imageSrc}
