@@ -1,3 +1,5 @@
+import '../styles/Timer.css';
+
 function Timer(props) {
     const { timeInSeconds } = props;
 
@@ -25,7 +27,7 @@ function Timer(props) {
         }
     }
 
-    return <div>{convertTimeInSeconds()}</div>;
+    return <div id="timer">{convertTimeInSeconds()}</div>;
 }
 
 export default Timer;

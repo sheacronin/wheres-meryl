@@ -1,4 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
+}
+
+#app {
+    height: 100vh;
+}
+
+header {
+    position: fixed;
+    z-index: 1;
+    width: 100vw;
+    background-color: #dff0f7;
+    color: #1f365a;
+    text-align: center;
+    font-family: 'Bodoni Moda', serif;
+    box-shadow: 0 0 10px #00000040;
+}
+
+header p {
+    padding: 0 20px 10px 20px;
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&display=swap');
+
 .click-box {
     border: 2px solid black;
     position: absolute;
@@ -5,7 +7,7 @@
 }
 
 .image-selection {
-    border: 2px solid black;
+    border: 2px solid #1f365a;
     width: 300px;
     height: 130px;
     position: absolute;
@@ -22,11 +24,13 @@
 
 .image-selection button:hover {
     cursor: pointer;
-    background-color: pink;
+    background-color: #f7dfec;
 }
 
 .image-selection h3 {
-    background-color: pink;
+    font-family: 'Bodoni Moda', serif;
+    background-color: #1f365a;
+    color: white;
     text-align: center;
     height: 30px;
 }

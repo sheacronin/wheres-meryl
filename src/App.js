@@ -31,12 +31,12 @@ function App() {
     }, [foundCharacters]);
 
     return (
-        <div>
+        <div id="app">
             <header>
-                <h1>Where's Meryl?</h1>
+                <h1>WHERE'S MERYL?</h1>
                 <p>
                     Scroll around this image of Greece to find Donna and the
-                    Dynamos from hit film Mamma Mia!
+                    Dynamos from hit film <em>Mamma Mia</em>!
                 </p>
                 <Timer timeInSeconds={timeInSeconds} />
             </header>

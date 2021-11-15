@@ -1,6 +1,6 @@
 .character-marker {
     position: absolute;
-    border: 2px solid black;
+    border: 2px solid #1f365a;
     background-color: white;
     width: 80px;
     height: 80px;
@@ -20,5 +20,5 @@
     height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-top: 20px solid black;
+    border-top: 20px solid #1f365a;
 }
