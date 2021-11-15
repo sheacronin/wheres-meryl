@@ -20,7 +20,9 @@ function CharacterMarker(props) {
     if (characterPosition) {
         const style = {
             top: `calc(${characterPosition.top}% - 120px)`,
-            left: characterPosition.left + '%',
+            left: `calc(${
+                (characterPosition.right + characterPosition.left) / 2
+            }% - 40px)`,
         };
 
         return (
