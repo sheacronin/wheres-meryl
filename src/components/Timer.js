@@ -2,7 +2,7 @@ function Timer(props) {
     const { timeInSeconds } = props;
 
     function convertTimeInSeconds() {
-        let minutes;
+        let minutes = 0;
         let seconds = timeInSeconds;
 
         if (timeInSeconds > 60) {

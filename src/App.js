@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useEffect, useState } from 'react/cjs/react.development';
 import './App.css';
 import Timer from './components/Timer';
@@ -10,9 +11,24 @@ function App() {
     const [foundCharacters, setFoundCharacters] = useState([]);
     const [timeInSeconds, setTimeInSeconds] = useState(0);
 
+    const timerIntervalID = useRef(null);
+
     useEffect(() => {
-        setInterval(() => setTimeInSeconds((prevState) => prevState + 1), 1000);
+        timerIntervalID.current = setInterval(runTimer, 1000);
     }, []);
+
+    function runTimer() {
+        setTimeInSeconds((prevState) => prevState + 1);
+    }
+
+    useEffect(() => {
+        console.log(foundCharacters.length);
+        // check for a win
+        if (foundCharacters.length === 3) {
+            console.log('Stopping Timer!');
+            clearInterval(timerIntervalID.current);
+        }
+    }, [foundCharacters]);
 
     return (
         <div>
