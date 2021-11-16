@@ -22,9 +22,19 @@
     border: none;
 }
 
+.image-selection button:disabled {
+    /* background-color: black; */
+    filter: grayscale();
+}
+
 .image-selection button:hover {
     cursor: pointer;
     background-color: #f7dfec;
+}
+
+.image-selection button:disabled:hover {
+    cursor: not-allowed;
+    background-color: transparent;
 }
 
 .image-selection h3 {

@@ -148,6 +148,7 @@ function WheresMerylImage(props) {
                 boundaries={clickBoxBoundaries}
                 setSelectedTarget={setSelectedTarget}
                 showingClickBox={showingClickBox}
+                foundCharacters={foundCharacters}
             />
             <img
                 className="wheres-meryl"
