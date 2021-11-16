@@ -7,7 +7,12 @@ import CharacterMarker from './CharacterMarker';
 import { getTargetPositionBox } from '../firestoreData';
 
 function WheresMerylImage(props) {
-    const { imageSrc, foundCharacters, setFoundCharacters } = props;
+    const {
+        imageSrc,
+        foundCharacters,
+        setFoundCharacters,
+        setSelectionResult,
+    } = props;
 
     const [clickBoxBoundaries, setClickBoxBoundaries] = useState({});
     const [clickBoxWidth, setClickBoxWidth] = useState({});
@@ -115,21 +120,22 @@ function WheresMerylImage(props) {
             setFoundCharacters((prevState) => [...prevState, target]);
 
             // TODO: show text that says "You've found [character]!"
-
-            // check if all 3 characters have been found
-            // if they have, end the game and ask for name
+            setSelectionResult([target, true]);
         }
 
         function handleIncorrectSelection(target) {
-            // show text that says "Sorry, there is no Donna or Dynamo here!"
             setShowingClickBox(false);
             setSelectedTarget(null);
+
+            // show text that says "Sorry, there is no Donna or Dynamo here!"
+            setSelectionResult([target, false]);
         }
     }, [
         selectedTarget,
         clickBoxBoundaries,
         setFoundCharacters,
         foundCharacters,
+        setSelectionResult,
     ]);
 
     return (
@@ -137,17 +143,17 @@ function WheresMerylImage(props) {
             {foundCharacters.map((character) => (
                 <CharacterMarker key={character} characterName={character} />
             ))}
-            <img
-                className="wheres-meryl"
-                src={imageSrc}
-                alt="Look around to find Donna and the Dynamos!"
-                onClick={showClickBox}
-            />
             <ClickBox
                 width={clickBoxWidth}
                 boundaries={clickBoxBoundaries}
                 setSelectedTarget={setSelectedTarget}
                 showingClickBox={showingClickBox}
+            />
+            <img
+                className="wheres-meryl"
+                src={imageSrc}
+                alt="Look around to find Donna and the Dynamos!"
+                onClick={showClickBox}
             />
         </div>
     );

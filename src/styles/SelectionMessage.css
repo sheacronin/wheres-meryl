@@ -1,0 +1,21 @@
+#selection-message {
+    background-color: white;
+    margin: 0 auto;
+}
+
+.fade-in {
+    animation: 500ms fade ease-in-out;
+}
+
+.fade-out {
+    animation: 1s fade ease-in-out reverse;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
