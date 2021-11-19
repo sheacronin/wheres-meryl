@@ -1,0 +1,32 @@
+#leaderboard {
+    width: 80%;
+    display: table;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+#leaderboard td,
+#leaderboard th.time,
+#leaderboard th.name {
+    border: 1px solid #1f365a;
+    height: 30px;
+    text-align: center;
+}
+
+#leaderboard th.time,
+#leaderboard th.name {
+    background-color: #1f365a;
+    color: white;
+}
+
+#leaderboard .time,
+#leaderboard .name {
+    width: 50%;
+}
+
+#leaderboard-title {
+    border: none;
+    background-color: #dff0f7;
+    font-size: 1.5em;
+}

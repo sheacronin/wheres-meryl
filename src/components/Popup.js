@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react/cjs/react.development';
 import { getLeaderboard, setHighScore } from '../firestoreData';
 import '../styles/Popup.css';
+import LeaderBoard from './LeaderBoard';
 
 function Popup(props) {
     const { time } = props;
@@ -35,12 +36,7 @@ function Popup(props) {
                     <input type="text" value={name} onChange={handleChange} />
                     <button onClick={onSubmitName}>Submit</button>
                 </form>
-                {showLeaderBoard &&
-                    highScores.map((highScore) => (
-                        <div key={highScore.time + '_' + highScore.name}>
-                            {highScore.name}
-                        </div>
-                    ))}
+                {showLeaderBoard && <LeaderBoard highScores={highScores} />}
             </div>
         </div>
     );
