@@ -25,30 +25,6 @@ function App() {
         setTimeInSeconds((prevState) => prevState + 1);
     }
 
-    function convertTimeInSeconds() {
-        let minutes = 0;
-        let seconds = timeInSeconds;
-
-        if (timeInSeconds > 60) {
-            minutes = Math.floor(timeInSeconds / 60);
-            seconds = timeInSeconds % 60;
-        }
-
-        if (minutes < 10) {
-            minutes = addZeroBefore(minutes);
-        }
-
-        if (seconds < 10) {
-            seconds = addZeroBefore(seconds);
-        }
-
-        return `${minutes}:${seconds}`;
-
-        function addZeroBefore(num) {
-            return '0' + num;
-        }
-    }
-
     useEffect(() => {
         console.log(foundCharacters.length);
         // check for a win
@@ -67,10 +43,10 @@ function App() {
                     Scroll around this image of Greece to find Donna and the
                     Dynamos from hit film <em>Mamma Mia</em>!
                 </p>
-                <Timer time={convertTimeInSeconds()} />
+                <Timer timeInSeconds={timeInSeconds} />
                 <SelectionMessage selectionResult={selectionResult} />
             </header>
-            {showPopup && <Popup time={convertTimeInSeconds()} />}
+            {showPopup && <Popup timeInSeconds={timeInSeconds} />}
             <WheresMerylImage
                 imageSrc={wheresMeryl1}
                 setFoundCharacters={setFoundCharacters}

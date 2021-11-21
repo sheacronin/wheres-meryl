@@ -1,9 +1,10 @@
+import formatTime from '../formatTime';
 import '../styles/Timer.css';
 
 function Timer(props) {
-    const { time } = props;
+    const { timeInSeconds } = props;
 
-    return <div id="timer">{time}</div>;
+    return <div id="timer">{formatTime(timeInSeconds)}</div>;
 }
 
 export default Timer;

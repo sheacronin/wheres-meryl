@@ -1,5 +1,8 @@
 import {
     doc,
+    query,
+    orderBy,
+    limit,
     getDoc,
     getDocs,
     addDoc,
@@ -17,19 +20,45 @@ async function getTargetPositionBox(target) {
     return targetBox;
 }
 
-// async function checkIfHighScore(time) {
+async function checkIfHighScore(timeInSeconds) {
+    const scoresRef = collection(db, 'images/1/high-scores');
+    const q = query(scoresRef, orderBy('time'), limit(10));
+    const querySnapshot = await getDocs(q);
+    console.log('checking high scores...');
 
-// }
+    const scoreTimes = [];
+    console.log(q);
+
+    querySnapshot.forEach((doc) => {
+        const score = doc.data();
+        console.log(score);
+        scoreTimes.push(score.time);
+    });
+
+    console.log(scoreTimes);
+
+    for (let i = 0; i < scoreTimes.length; i++) {
+        console.log(scoreTimes[i], timeInSeconds);
+        if (timeInSeconds < scoreTimes[i]) {
+            console.log('high score');
+            return true;
+        }
+    }
+
+    return false;
+}
 
 async function setHighScore(name, time) {
-    const scoreRef = await addDoc(collection(db, 'images/1/high-scores'), {
+    await addDoc(collection(db, 'images/1/high-scores'), {
         name,
         time,
     });
 }
 
 async function getLeaderboard() {
-    const querySnapshot = await getDocs(collection(db, 'images/1/high-scores'));
+    const scoresRef = collection(db, 'images/1/high-scores');
+    const q = query(scoresRef, orderBy('time'), limit(10));
+    const querySnapshot = await getDocs(q);
     const highScores = [];
     querySnapshot.forEach((doc) => {
         highScores.push(doc.data());
@@ -38,4 +67,4 @@ async function getLeaderboard() {
     return highScores;
 }
 
-export { getTargetPositionBox, setHighScore, getLeaderboard };
+export { getTargetPositionBox, setHighScore, getLeaderboard, checkIfHighScore };

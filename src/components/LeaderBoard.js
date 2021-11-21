@@ -1,4 +1,5 @@
 import '../styles/LeaderBoard.css';
+import formatTime from '../formatTime';
 
 function LeaderBoard(props) {
     const { highScores } = props;
@@ -16,7 +17,7 @@ function LeaderBoard(props) {
             </tr>
             {highScores.map((highScore) => (
                 <tr key={highScore.time + '_' + highScore.name}>
-                    <td className="time">{highScore.time}</td>
+                    <td className="time">{formatTime(highScore.time)}</td>
                     <td className="name">{highScore.name}</td>
                 </tr>
             ))}
