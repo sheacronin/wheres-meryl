@@ -9,27 +9,24 @@ import '../styles/Popup.css';
 import LeaderBoard from './LeaderBoard';
 
 function Popup(props) {
-    const { timeInSeconds } = props;
+    const { timeInSeconds, resetGame } = props;
 
     const [name, setName] = useState('');
-    const [showLeaderBoard, setShowLeaderBoard] = useState(false);
     const [highScores, setHighScores] = useState([]);
-    const [isHighScore, setIsHighScore] = useState(false);
+    const [showLeaderBoard, setShowLeaderBoard] = useState(false);
+    const [showNameInput, setShowNameInput] = useState(false);
 
-    // TODO: on mount, check if time is < the 10th entry in high scores
     useEffect(() => {
         console.log('running effect');
         checkIfHighScore(timeInSeconds).then((result) => {
             console.log(result);
             if (result === true) {
-                setIsHighScore(true);
+                setShowNameInput(true);
             } else {
                 setShowLeaderBoard(true);
             }
         });
     }, [timeInSeconds]);
-
-    // TODO: then determine which place this time is in and cut off the 10th highest score
 
     function handleChange(e) {
         setName(e.target.value);
@@ -39,6 +36,7 @@ function Popup(props) {
         e.preventDefault();
         setHighScore(name, timeInSeconds);
         setShowLeaderBoard(true);
+        setShowNameInput(false);
     }
 
     useEffect(() => {
@@ -52,7 +50,7 @@ function Popup(props) {
                     You Found Donna and the Dynamos in{' '}
                     {formatTime(timeInSeconds)}!
                 </h3>
-                {isHighScore && (
+                {showNameInput && (
                     <form>
                         <p>You made it onto the leaderboard!</p>
                         <label htmlFor="high-score-name">Your Name:</label>
@@ -67,6 +65,11 @@ function Popup(props) {
                     </form>
                 )}
                 {showLeaderBoard && <LeaderBoard highScores={highScores} />}
+                {showLeaderBoard && (
+                    <button id="play-again" onClick={resetGame}>
+                        Play Again
+                    </button>
+                )}
             </div>
         </div>
     );

@@ -35,6 +35,13 @@ function App() {
         }
     }, [foundCharacters]);
 
+    function resetGame() {
+        setShowPopup(false);
+        setTimeInSeconds(0);
+        timerIntervalID.current = setInterval(runTimer, 1000);
+        setFoundCharacters([]);
+    }
+
     return (
         <div id="app">
             <header>
@@ -46,7 +53,9 @@ function App() {
                 <Timer timeInSeconds={timeInSeconds} />
                 <SelectionMessage selectionResult={selectionResult} />
             </header>
-            {showPopup && <Popup timeInSeconds={timeInSeconds} />}
+            {showPopup && (
+                <Popup timeInSeconds={timeInSeconds} resetGame={resetGame} />
+            )}
             <WheresMerylImage
                 imageSrc={wheresMeryl1}
                 setFoundCharacters={setFoundCharacters}

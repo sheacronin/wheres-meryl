@@ -118,8 +118,6 @@ function WheresMerylImage(props) {
             console.log('found ' + target);
             // place marker on character
             setFoundCharacters((prevState) => [...prevState, target]);
-
-            // TODO: show text that says "You've found [character]!"
             setSelectionResult([target, true]);
         }
 
@@ -127,7 +125,6 @@ function WheresMerylImage(props) {
             setShowingClickBox(false);
             setSelectedTarget(null);
 
-            // show text that says "Sorry, there is no Donna or Dynamo here!"
             setSelectionResult([target, false]);
         }
     }, [
