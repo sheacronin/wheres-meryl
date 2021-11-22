@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Timer from './components/Timer';
 import WheresMerylImage from './components/WheresMerylImage';

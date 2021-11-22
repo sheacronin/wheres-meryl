@@ -3,7 +3,7 @@ import donna from '../img/donna.png';
 import tanya from '../img/tanya.png';
 import rosie from '../img/rosie.png';
 import { getTargetPositionBox } from '../firestoreData';
-import { useEffect, useState } from 'react/cjs/react.development';
+import { useEffect, useState } from 'react';
 
 const images = { donna, tanya, rosie };
 
