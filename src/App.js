@@ -26,10 +26,8 @@ function App() {
     }
 
     useEffect(() => {
-        console.log(foundCharacters.length);
         // check for a win
         if (foundCharacters.length === 3) {
-            console.log('Stopping Timer!');
             clearInterval(timerIntervalID.current);
             setShowPopup(true);
         }

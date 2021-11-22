@@ -24,23 +24,16 @@ async function checkIfHighScore(timeInSeconds) {
     const scoresRef = collection(db, 'images/1/high-scores');
     const q = query(scoresRef, orderBy('time'), limit(10));
     const querySnapshot = await getDocs(q);
-    console.log('checking high scores...');
 
     const scoreTimes = [];
-    console.log(q);
 
     querySnapshot.forEach((doc) => {
         const score = doc.data();
-        console.log(score);
         scoreTimes.push(score.time);
     });
 
-    console.log(scoreTimes);
-
     for (let i = 0; i < scoreTimes.length; i++) {
-        console.log(scoreTimes[i], timeInSeconds);
         if (timeInSeconds < scoreTimes[i]) {
-            console.log('high score');
             return true;
         }
     }

@@ -17,9 +17,7 @@ function Popup(props) {
     const [showNameInput, setShowNameInput] = useState(false);
 
     useEffect(() => {
-        console.log('running effect');
         checkIfHighScore(timeInSeconds).then((result) => {
-            console.log(result);
             if (result === true) {
                 setShowNameInput(true);
             } else {

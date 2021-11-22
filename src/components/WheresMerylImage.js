@@ -62,7 +62,6 @@ function WheresMerylImage(props) {
         if (!selectedTarget) return;
 
         checkIfClickedTarget(selectedTarget).then((didClickTarget) => {
-            console.log(didClickTarget);
             if (didClickTarget) {
                 handleCorrectSelection(selectedTarget);
             } else {
@@ -107,7 +106,6 @@ function WheresMerylImage(props) {
                 }
             }
 
-            console.log(isInTarget);
             return isInTarget;
         }
 
@@ -115,8 +113,7 @@ function WheresMerylImage(props) {
             setShowingClickBox(false);
             setSelectedTarget(null);
 
-            console.log('found ' + target);
-            // place marker on character
+            // places marker on character
             setFoundCharacters((prevState) => [...prevState, target]);
             setSelectionResult([target, true]);
         }
